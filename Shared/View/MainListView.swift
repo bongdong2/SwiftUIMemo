@@ -16,14 +16,18 @@ struct MainListView: View {
     
     var body: some View {
         NavigationView {
-            List(store.list) { memo in
-                NavigationLink { // 오른쪽으로 푸시되면서 화면전환 할 떄 사용한다.
-                    DetailView(memo: memo)
-                } label: {
-                    MemoCell(memo: memo)
-                    // 뷰가 가독성이 떨어져서 서브뷰로 분리한다.
-                    // Cmd + shift + A -> Extract Subview -> 새파일 생성하여 옮기기
+            List {
+                // 목록에서 메모 삭제를 위해 리스트를 ForEach변경하고 List로 감싼다.
+                ForEach(store.list) { memo in
+                    NavigationLink { // 오른쪽으로 푸시되면서 화면전환 할 떄 사용한다.
+                        DetailView(memo: memo)
+                    } label: {
+                        MemoCell(memo: memo)
+                        // 뷰가 가독성이 떨어져서 서브뷰로 분리한다.
+                        // Cmd + shift + A -> Extract Subview -> 새파일 생성하여 옮기기
+                    }
                 }
+                .onDelete(perform: store.delete)
             }
             .listStyle(.plain)
             .navigationTitle("내 메모")
