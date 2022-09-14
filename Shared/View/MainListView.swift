@@ -17,9 +17,13 @@ struct MainListView: View {
     var body: some View {
         NavigationView {
             List(store.list) { memo in
-                MemoCell(memo: memo)
-                // 뷰가 가독성이 떨어져서 서브뷰로 분리한다.
-                // Cmd + shift + A -> Extract Subview -> 새파일 생성하여 옮기기
+                NavigationLink { // 오른쪽으로 푸시되면서 화면전환 할 떄 사용한다.
+                    DetailView(memo: memo)
+                } label: {
+                    MemoCell(memo: memo)
+                    // 뷰가 가독성이 떨어져서 서브뷰로 분리한다.
+                    // Cmd + shift + A -> Extract Subview -> 새파일 생성하여 옮기기
+                }
             }
             .listStyle(.plain)
             .navigationTitle("내 메모")
