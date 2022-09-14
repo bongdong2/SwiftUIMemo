@@ -16,12 +16,12 @@ class Memo: Identifiable, ObservableObject {
     
     let id: UUID
     @Published var content: String // @Published : 새로운 값을 추가할 때마다 바인딩된 Uid? 가 자동으로 업데이트
-    let inserDate: Date
+    let insertDate: Date
     
     init(content: String, insertDate: Date = Date.now) {
         id = UUID()
         self.content = content
-        self.inserDate = insertDate
+        self.insertDate = insertDate
     }
     
 }
